@@ -7,6 +7,7 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -60,7 +61,10 @@ public class SecondTest {
     private void assertElementHasText(By by, String expectedText, String errorTextMessage) {
         WebDriverWait wait = new WebDriverWait(driver, 5);
         wait.withMessage(errorTextMessage + "/n");
-        WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(by));
+
+        ExpectedCondition<WebElement> webElementExpectedCondition = ExpectedConditions.presenceOfElementLocated(by);
+
+        WebElement element = wait.until(webElementExpectedCondition);
 
         String actualText = element.getAttribute("text");
 
